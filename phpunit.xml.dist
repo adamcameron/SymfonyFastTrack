@@ -6,7 +6,7 @@
     cacheResult="false"
     testdox="true"
     failOnWarning="true"
-    bootstrap="tests/bootstrap.php"
+    bootstrap="tests/php/bootstrap.php"
 >
     <coverage>
         <include>
@@ -18,10 +18,10 @@
     </coverage>
     <testsuites>
         <testsuite name="Integration tests">
-            <directory>tests/Integration/</directory>
+            <directory>tests/php/Integration/</directory>
         </testsuite>
         <testsuite name="Unit tests">
-            <directory>tests/Unit/</directory>
+            <directory>tests/php/Unit/</directory>
         </testsuite>
     </testsuites>
 </phpunit>

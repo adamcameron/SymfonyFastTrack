@@ -3,5 +3,12 @@
     "description": "Symfony: The Fast Track requires Node.js for some reason. So here it is.",
     "version": "1.0.0",
     "author": "Adam Cameron",
-    "license": "GPL-3.0-or-later"
+    "license": "GPL-3.0-or-later",
+    "devDependencies": {
+        "chai": "^4.3.7",
+        "mocha": "^10.2.0"
+    },
+    "scripts": {
+        "test": "mocha tests/nodejs/**/*.js"
+    }
 }
