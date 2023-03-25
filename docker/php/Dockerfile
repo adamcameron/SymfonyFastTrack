@@ -3,16 +3,16 @@ FROM php:8.2.4-fpm
 RUN ["apt-get", "update"]
 RUN ["apt-get", "install", "-y", "zip", "unzip", "git", "vim"]
 
-COPY php.ini /usr/local/etc/php/php.ini
-COPY home/.bash_history /root/.bash_history
-COPY home/.bashrc /root/.bashrc
-COPY home/.vimrc /root/.vimrc
+COPY php/php.ini /usr/local/etc/php/php.ini
+COPY php/home/.bash_history /root/.bash_history
+COPY shared/home/.bashrc /root/.bashrc
+COPY shared/home/.vimrc /root/.vimrc
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 RUN pecl install xdebug && docker-php-ext-enable xdebug
-COPY conf.d/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-COPY conf.d/error_reporting.ini /usr/local/etc/php/conf.d/error_reporting.ini
+COPY php/conf.d/xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+COPY php/conf.d/error_reporting.ini /usr/local/etc/php/conf.d/error_reporting.ini
 
 RUN apt-get install -y libicu-dev && docker-php-ext-configure intl && docker-php-ext-install intl
 

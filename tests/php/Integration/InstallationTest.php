@@ -1,6 +1,6 @@
 <?php
 
-namespace adamcameron\symfonythefasttrack\tests\integration;
+namespace adamcameron\symfonythefasttrack\tests\Integration;
 
 use PHPUnit\Framework\TestCase;
 use \DOMDocument;

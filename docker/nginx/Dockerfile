@@ -1,12 +1,14 @@
 FROM nginx
 
-COPY home/.bashrc /root/.bashrc
-COPY home/.bash_history /root/.bash_history
-COPY home/.vimrc /root/.vimrc
+COPY nginx/home/.bash_history /root/.bash_history
+COPY shared/home/.bashrc /root/.bashrc
+COPY shared/home/.vimrc /root/.vimrc
+
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+COPY nginx/sites/ /etc/nginx/sites-available/
+COPY nginx/conf.d/ /etc/nginx/conf.d/
 
 WORKDIR /usr/share/nginx/
-COPY ./nginx.conf /etc/nginx/nginx.conf
-COPY ./sites/ /etc/nginx/sites-available/
-COPY ./conf.d/ /etc/nginx/conf.d/
+
 CMD ["nginx"]
 EXPOSE 80

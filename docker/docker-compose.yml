@@ -2,8 +2,8 @@ version: "3"
 services:
     nginx:
         build:
-            context: nginx
-            dockerfile: Dockerfile
+            context: .
+            dockerfile: nginx/Dockerfile
 
         ports:
             - "8062:80"
@@ -14,10 +14,20 @@ services:
         volumes:
             - ../public:/usr/share/nginx/html/
 
+        depends_on:
+            - php
+
+        networks:
+            - backend
+
     php:
         build:
-            context: php
-            dockerfile: Dockerfile
+            context: .
+            dockerfile: php/Dockerfile
+
+        env_file:
+            - shared/envVars.public
+            - shared/envVars.private
 
         stdin_open: true
         tty: true
@@ -25,13 +35,45 @@ services:
         volumes:
             - ..:/var/www
 
+        networks:
+            - backend
+
     nodejs:
         build:
-            context: nodejs
-            dockerfile: Dockerfile
+            context: .
+            dockerfile: nodejs/Dockerfile
 
         stdin_open: true
         tty: true
 
         volumes:
             - ..:/usr/share/nodejs/
+
+    postgres:
+        build:
+            context: .
+            dockerfile: postgres/Dockerfile
+
+        env_file:
+            - shared/envVars.public
+            - shared/envVars.private
+
+        ports:
+            - "5432:5432"
+        volumes:
+            - postgresData:/var/lib/postgresql/data
+
+        stdin_open: true
+        tty: true
+
+        networks:
+            backend:
+                aliases:
+                    - database.backend
+
+volumes:
+    postgresData:
+
+networks:
+    backend:
+        driver: "bridge"
