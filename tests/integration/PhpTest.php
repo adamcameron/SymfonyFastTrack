@@ -1,6 +1,6 @@
 <?php
 
-namespace adamcameron\symfonythefasttrack\test\integration;
+namespace adamcameron\symfonythefasttrack\tests\integration;
 
 use PHPUnit\Framework\TestCase;
 
