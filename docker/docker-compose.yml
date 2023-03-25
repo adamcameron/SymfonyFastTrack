@@ -1,0 +1,26 @@
+version: "3"
+services:
+  nginx:
+    build:
+      context: nginx
+      dockerfile: Dockerfile
+
+    ports:
+      - "8062:80"
+
+    stdin_open: true
+    tty: true
+
+    volumes:
+      - ../public:/usr/share/nginx/html/
+
+  php:
+    build:
+      context: php
+      dockerfile: Dockerfile
+
+    stdin_open: true
+    tty: true
+
+    volumes:
+      - ..:/var/www
