@@ -1,0 +1,7 @@
+{
+    "name": "symfony-the-fast-track",
+    "description": "Symfony: The Fast Track requires Node.js for some reason. So here it is.",
+    "version": "1.0.0",
+    "author": "Adam Cameron",
+    "license": "GPL-3.0-or-later"
+}

@@ -1,6 +1,8 @@
 FROM nginx
 
 COPY home/.bashrc /root/.bashrc
+COPY home/.bash_history /root/.bash_history
+COPY home/.vimrc /root/.vimrc
 
 WORKDIR /usr/share/nginx/
 COPY ./nginx.conf /etc/nginx/nginx.conf

@@ -6,6 +6,7 @@ RUN ["apt-get", "install", "-y", "zip", "unzip", "git", "vim"]
 COPY php.ini /usr/local/etc/php/php.ini
 COPY home/.bash_history /root/.bash_history
 COPY home/.bashrc /root/.bashrc
+COPY home/.vimrc /root/.vimrc
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
