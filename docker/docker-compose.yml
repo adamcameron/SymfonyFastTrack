@@ -26,8 +26,10 @@ services:
             dockerfile: php/Dockerfile
 
         env_file:
-            - shared/envVars.public
             - shared/envVars.private
+            - shared/envVars.public
+            - php/envVars.private
+            - php/envVars.public
 
         stdin_open: true
         tty: true
@@ -55,8 +57,8 @@ services:
             dockerfile: postgres/Dockerfile
 
         env_file:
-            - shared/envVars.public
             - shared/envVars.private
+            - shared/envVars.public
 
         ports:
             - "5432:5432"
@@ -70,6 +72,31 @@ services:
             backend:
                 aliases:
                     - database.backend
+
+    mailer:
+        build:
+            context: .
+            dockerfile: mailer/Dockerfile
+        ports:
+            - 1025
+            - 1080
+
+    blackfire:
+        build:
+            context: .
+            dockerfile: blackfire/Dockerfile
+
+        env_file:
+            - blackfire/envVars.private
+
+        environment:
+            BLACKFIRE_LOG_LEVEL: 4
+
+        stdin_open: true
+        tty: true
+
+        ports:
+            - 8307
 
 volumes:
     postgresData:

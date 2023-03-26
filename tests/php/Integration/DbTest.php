@@ -2,10 +2,12 @@
 
 namespace adamcameron\symfonythefasttrack\tests\Integration;
 
+use adamcameron\symfonythefasttrack\Kernel;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use PHPUnit\Framework\TestCase;
 use stdClass;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /** @testdox DB tests */
 class DbTest extends TestCase
@@ -15,6 +17,16 @@ class DbTest extends TestCase
     public function testDbalConnection()
     {
         $connection = $this->getDbalConnection();
+        $result = $connection->executeQuery("SELECT version() AS version");
+
+        $this->assertStringStartsWith("PostgreSQL 15", $result->fetchOne());
+    }
+
+    /** @testdox It has configured the Connection in the container with the correct DATABASE_URL */
+    public function testContainerConnection()
+    {
+        $container = $this->getContainer();
+        $connection = $container->get("database_connection");
         $result = $connection->executeQuery("SELECT version() AS version");
 
         $this->assertStringStartsWith("PostgreSQL 15", $result->fetchOne());
@@ -42,5 +54,13 @@ class DbTest extends TestCase
             "port" => $parameters->port,
             "driver" => "pdo_pgsql"
         ]);
+    }
+
+    private function getContainer(): ContainerInterface
+    {
+        $kernel = new Kernel("test", false);
+        $kernel->boot();
+
+        return $kernel->getContainer();
     }
 }

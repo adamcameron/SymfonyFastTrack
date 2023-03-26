@@ -1,4 +1,15 @@
-/.idea
-/vendor
-/.phpunit.result.cache
-/node_modules
+/.idea/
+/vendor/
+/phpunit.xml
+/.phpunit.cache/
+/node_modules/
+**/envVars.private
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+###< symfony/framework-bundle ###

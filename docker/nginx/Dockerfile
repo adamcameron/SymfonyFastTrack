@@ -1,5 +1,8 @@
 FROM nginx
 
+RUN ["apt-get", "update"]
+RUN ["apt-get", "install", "-y", "vim", "iputils-ping"]
+
 COPY nginx/home/.bash_history /root/.bash_history
 COPY shared/home/.bashrc /root/.bashrc
 COPY shared/home/.vimrc /root/.vimrc

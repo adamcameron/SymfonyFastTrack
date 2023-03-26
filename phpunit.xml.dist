@@ -2,20 +2,22 @@
 <phpunit
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd"
+    backupGlobals="false"
     colors="true"
     cacheResult="false"
     testdox="true"
     failOnWarning="true"
     bootstrap="tests/php/bootstrap.php"
+    cacheDirectory=".phpunit.cache"
 >
-    <coverage>
-        <include>
-            <directory suffix=".php">src</directory>
-        </include>
-        <report>
-            <html outputDirectory="public/test-coverage-report/" />
-        </report>
-    </coverage>
+    <php>
+        <ini name="display_errors" value="1"/>
+        <ini name="error_reporting" value="-1"/>
+        <server name="APP_ENV" value="test" force="true"/>
+        <server name="SHELL_VERBOSITY" value="-1"/>
+        <server name="SYMFONY_PHPUNIT_REMOVE" value=""/>
+        <server name="SYMFONY_PHPUNIT_VERSION" value="10.0"/>
+    </php>
     <testsuites>
         <testsuite name="Integration tests">
             <directory>tests/php/Integration/</directory>
@@ -24,4 +26,18 @@
             <directory>tests/php/Unit/</directory>
         </testsuite>
     </testsuites>
+    <coverage>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+        <report>
+            <html outputDirectory="public/test-coverage-report/"/>
+        </report>
+    </coverage>
+    <!-- Run `composer require symfony/panther` before enabling this extension -->
+    <!--
+      <extensions>
+          <extension class="Symfony\Component\Panther\ServerExtension" />
+      </extensions>
+      -->
 </phpunit>
