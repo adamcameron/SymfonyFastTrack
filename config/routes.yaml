@@ -3,3 +3,7 @@ controllers:
         path: ../src/Controller/
         namespace: adamcameron\symfonythefasttrack\Controller
     type: attribute
+
+conference:
+    resource: routes/conference.yaml
+    prefix: /conference/
