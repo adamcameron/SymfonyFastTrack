@@ -3,9 +3,7 @@
 namespace adamcameron\symfonythefasttrack\tests\Functional\Doctrine;
 
 use adamcameron\symfonythefasttrack\Kernel;
-use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Connections\PrimaryReadReplicaConnection;
-use Doctrine\DBAL\DriverManager;
 use PHPUnit\Framework\TestCase;
 
 /** @testdox Tests the default connection */
@@ -37,66 +35,6 @@ class DefaultConnectionTest extends TestCase
             $connection->isConnectedToPrimary(),
             "Should have been switched to the primary after writing"
         );
-    }
-
-    /** @testdox Writing to primary definitely does not impact the replica */
-    public function testWritingToPrimaryDoesNotImpactReplica()
-    {
-        $sqlForCount = "SELECT COUNT(1) AS count FROM test";
-
-        $primaryConnection = $this->getPrimaryConnection();
-        $replicaConnection = $this->getReplicaConnection();
-
-        $initialPrimaryCount = $primaryConnection->executeQuery($sqlForCount)->fetchOne();
-        $initialReplicaCount = $replicaConnection->executeQuery($sqlForCount)->fetchOne();
-        $this->assertNotEquals(
-            $initialPrimaryCount,
-            $initialReplicaCount,
-            "Test aborted as the test requires the DBs to NOT be in sync (and they are)"
-        );
-
-        $defaultConnection = $this->getDefaultConnection();
-        $this->assertFalse($defaultConnection->isConnectedToPrimary(), "Connection did not start on replica");
-
-        $initialDefaultCount = $defaultConnection->executeQuery($sqlForCount)->fetchOne();
-        $this->assertEquals($initialDefaultCount, $initialReplicaCount, "Row count from default should match replica");
-
-        $defaultConnection->executeStatement("INSERT INTO test (value) VALUES (?)", ["TEST_VALUE"]);
-        $this->assertTrue(
-            $defaultConnection->isConnectedToPrimary(),
-            "Connection did not switch to primary after INSERT"
-        );
-
-        $countFromDefault = $defaultConnection->executeQuery($sqlForCount)->fetchOne();
-        $countFromPrimary = $primaryConnection->executeQuery($sqlForCount)->fetchOne();
-        $countFromReplica = $replicaConnection->executeQuery($sqlForCount)->fetchOne();
-
-        $this->assertEquals($countFromDefault, $countFromPrimary, "Row count from default should match primary");
-        $this->assertEquals($initialReplicaCount, $countFromReplica, "Row count from replica should not have changed");
-    }
-
-    private function getPrimaryConnection(): Connection
-    {
-        return DriverManager::getConnection([
-            "dbname" => getenv("POSTGRES_PRIMARY_DB"),
-            "user" => getenv("POSTGRES_PRIMARY_USER"),
-            "password" => getenv("POSTGRES_PRIMARY_PASSWORD"),
-            "host" => getenv("POSTGRES_PRIMARY_HOST"),
-            "port" => getenv("POSTGRES_PRIMARY_PORT"),
-            "driver" => "pdo_pgsql"
-        ]);
-    }
-
-    private function getReplicaConnection(): Connection
-    {
-        return DriverManager::getConnection([
-            "dbname" => getenv("POSTGRES_REPLICA_DB"),
-            "user" => getenv("POSTGRES_REPLICA_USER"),
-            "password" => getenv("POSTGRES_REPLICA_PASSWORD"),
-            "host" => getenv("POSTGRES_REPLICA_HOST"),
-            "port" => getenv("POSTGRES_REPLICA_PORT"),
-            "driver" => "pdo_pgsql"
-        ]);
     }
 
     public function getDefaultConnection(): PrimaryReadReplicaConnection
