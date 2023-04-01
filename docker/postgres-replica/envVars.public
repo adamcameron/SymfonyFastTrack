@@ -1,0 +1,4 @@
+POSTGRES_HOST=database-replica.backend
+POSTGRES_PORT=5433
+POSTGRES_DB=db1replica
+POSTGRES_USER=user1replica

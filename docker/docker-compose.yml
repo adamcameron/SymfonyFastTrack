@@ -26,8 +26,6 @@ services:
             dockerfile: php/Dockerfile
 
         env_file:
-            - shared/envVars.private
-            - shared/envVars.public
             - php/envVars.private
             - php/envVars.public
 
@@ -51,19 +49,20 @@ services:
         volumes:
             - ..:/usr/share/nodejs/
 
-    postgres:
+    postgres-primary:
         build:
             context: .
-            dockerfile: postgres/Dockerfile
+            dockerfile: postgres-primary/Dockerfile
 
         env_file:
-            - shared/envVars.private
-            - shared/envVars.public
+            - postgres-primary/envVars.private
+            - postgres-primary/envVars.public
 
         ports:
             - "5432:5432"
+
         volumes:
-            - postgresData:/var/lib/postgresql/data
+            - postgres-primary-data:/var/lib/postgresql/data
 
         stdin_open: true
         tty: true
@@ -71,7 +70,32 @@ services:
         networks:
             backend:
                 aliases:
-                    - database.backend
+                    - database-primary.backend
+
+    postgres-replica:
+        build:
+            context: .
+            dockerfile: postgres-replica/Dockerfile
+
+        env_file:
+            - postgres-replica/envVars.private
+            - postgres-replica/envVars.public
+
+        ports:
+            - "5433:5433"
+
+        command: -p 5433
+
+        volumes:
+            - postgres-replica-data:/var/lib/postgresql/data
+
+        stdin_open: true
+        tty: true
+
+        networks:
+            backend:
+                aliases:
+                    - database-replica.backend
 
     mailer:
         build:
@@ -99,7 +123,8 @@ services:
             - 8307
 
 volumes:
-    postgresData:
+    postgres-primary-data:
+    postgres-replica-data:
 
 networks:
     backend:

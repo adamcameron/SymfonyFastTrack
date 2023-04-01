@@ -3,7 +3,7 @@
 /phpunit.xml
 /.phpunit.cache/
 /node_modules/
-**/envVars.private
+**/*.private
 
 ###> symfony/framework-bundle ###
 /.env.local

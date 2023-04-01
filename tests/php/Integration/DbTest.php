@@ -26,7 +26,7 @@ class DbTest extends TestCase
     public function testContainerConnection()
     {
         $container = $this->getContainer();
-        $connection = $container->get("database_connection");
+        $connection = $container->get("doctrine.dbal.default_connection");
         $result = $connection->executeQuery("SELECT version() AS version");
 
         $this->assertStringStartsWith("PostgreSQL 15", $result->fetchOne());
@@ -35,11 +35,11 @@ class DbTest extends TestCase
     private function getConnectionParameters() : stdClass
     {
         return (object) [
-            "host" => "database.backend",
-            "port" => "5432",
-            "database" => getenv("POSTGRES_DB"),
-            "username" => getenv("POSTGRES_USER"),
-            "password" => getenv("POSTGRES_PASSWORD")
+            "host" => getenv("POSTGRES_PRIMARY_HOST"),
+            "port" => getenv("POSTGRES_PRIMARY_PORT"),
+            "database" => getenv("POSTGRES_PRIMARY_DB"),
+            "username" => getenv("POSTGRES_PRIMARY_USER"),
+            "password" => getenv("POSTGRES_PRIMARY_PASSWORD")
         ];
     }
 
