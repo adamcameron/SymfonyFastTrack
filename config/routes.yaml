@@ -4,6 +4,6 @@ controllers:
         namespace: adamcameron\symfonythefasttrack\Controller
     type: attribute
 
-conference:
-    resource: routes/conference.yaml
-    prefix: /conference/
+admin:
+    resource: routes/admin.yaml
+    prefix: /admin

@@ -19,6 +19,9 @@
         <server name="SYMFONY_PHPUNIT_VERSION" value="10.0"/>
     </php>
     <testsuites>
+        <testsuite name="Accetpance tests">
+            <directory>tests/php/Acceptance/</directory>
+        </testsuite>
         <testsuite name="Functional tests">
             <directory>tests/php/Functional/</directory>
         </testsuite>

@@ -1,0 +1,4 @@
+admin:
+    path: /
+    methods: [GET,POST]
+    controller: adamcameron\symfonythefasttrack\Controller\Admin\DashboardController::index

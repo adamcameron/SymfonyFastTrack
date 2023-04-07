@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230402161944 extends AbstractMigration
+final class Version20230407120927 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -39,7 +39,6 @@ final class Version20230402161944 extends AbstractMigration
         $this->addSql('DROP TRIGGER IF EXISTS notify_trigger ON messenger_messages;');
         $this->addSql('CREATE TRIGGER notify_trigger AFTER INSERT OR UPDATE ON messenger_messages FOR EACH ROW EXECUTE PROCEDURE notify_messenger_messages();');
         $this->addSql('ALTER TABLE comment ADD CONSTRAINT FK_9474526C604B8382 FOREIGN KEY (conference_id) REFERENCES conference (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('DROP TABLE test');
     }
 
     public function down(Schema $schema): void
@@ -48,7 +47,6 @@ final class Version20230402161944 extends AbstractMigration
         $this->addSql('CREATE SCHEMA public');
         $this->addSql('DROP SEQUENCE comment_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE conference_id_seq CASCADE');
-        $this->addSql('CREATE TABLE test (id INT NOT NULL, value VARCHAR(50) NOT NULL)');
         $this->addSql('ALTER TABLE comment DROP CONSTRAINT FK_9474526C604B8382');
         $this->addSql('DROP TABLE comment');
         $this->addSql('DROP TABLE conference');

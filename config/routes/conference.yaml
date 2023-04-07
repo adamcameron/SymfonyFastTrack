@@ -1,4 +1,0 @@
-conference:
-    path: /
-    methods: [GET]
-    controller: adamcameron\symfonythefasttrack\Controller\ConferenceController::index
