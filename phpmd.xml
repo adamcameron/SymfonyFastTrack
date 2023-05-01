@@ -4,7 +4,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd"
          xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd">
-    <description>Created with the PHP Coding Standard Generator. http://edorian.github.com/php-coding-standard-generator/</description>
+    <description>Created with the PHP Coding Standard Generator.
+        http://edorian.github.com/php-coding-standard-generator/
+    </description>
     <rule ref="rulesets/codesize.xml"/>
     <rule ref="rulesets/controversial.xml"/>
     <rule ref="rulesets/design.xml"/>
@@ -16,7 +18,8 @@
     </rule>
     <rule ref="rulesets/naming.xml/ShortVariable">
         <properties>
-            <property name="exceptions" value="ch,e,i,id" />
+            <property name="minimum" value="2"/>
+            <property name="exceptions" value="ch,e,i,id"/>
         </properties>
     </rule>
     <rule ref="rulesets/naming.xml/ShortMethodName"/>

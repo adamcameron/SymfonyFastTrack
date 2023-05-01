@@ -3,7 +3,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         name="PSR12"
         xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd"
-    >
+>
     <description>The PSR-12 coding standard.</description>
     <arg name="tab-width" value="4"/>
 
@@ -47,13 +47,13 @@
     Blank lines MAY be added to improve readability and to indicate related blocks of code except where explicitly forbidden. -->
     <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
     <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.StartFile">
-        <severity>0</severity>
+        <severity>5</severity>
     </rule>
     <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.EndFile">
-        <severity>0</severity>
+        <severity>5</severity>
     </rule>
     <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.EmptyLines">
-        <severity>0</severity>
+        <severity>5</severity>
     </rule>
 
     <!-- There MUST NOT be more than one statement per line. -->

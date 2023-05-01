@@ -1,6 +1,6 @@
 <?php
 
-namespace adamcameron\symfonythefasttrack\tests\Acceptance\Controller;
+namespace adamcameron\symfonythefasttrack\tests\Acceptance\Controller\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;

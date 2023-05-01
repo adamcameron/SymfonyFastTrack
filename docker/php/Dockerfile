@@ -1,7 +1,7 @@
 FROM php:8.2.4-fpm
 
 RUN ["apt-get", "update"]
-RUN ["apt-get", "install", "-y", "zip", "unzip", "git", "vim", "iputils-ping"]
+RUN ["apt-get", "install", "-y", "zip", "unzip", "git", "vim", "iputils-ping", "tree"]
 
 COPY php/php.ini /usr/local/etc/php/php.ini
 COPY php/home/.bash_history /root/.bash_history

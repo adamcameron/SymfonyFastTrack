@@ -5,10 +5,18 @@
     "author": "Adam Cameron",
     "license": "GPL-3.0-or-later",
     "devDependencies": {
+        "@hotwired/stimulus": "^3.2.1",
+        "@symfony/stimulus-bridge": "^3.2.2",
+        "@symfony/webpack-encore": "^4.3.0",
         "chai": "^4.3.7",
-        "mocha": "^10.2.0"
+        "mocha": "^10.2.0",
+        "webpack-notifier": "^1.15.0"
     },
     "scripts": {
-        "test": "mocha tests/nodejs/**/*.js"
+        "test": "mocha tests/nodejs/**/*.js",
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress"
     }
 }

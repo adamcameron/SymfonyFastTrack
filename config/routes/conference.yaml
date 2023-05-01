@@ -1,0 +1,9 @@
+index:
+    path: /
+    methods: [ GET ]
+    controller: adamcameron\symfonythefasttrack\Controller\ConferenceController::index
+
+conference_show:
+    path: /{id}
+    methods: [ GET ]
+    controller: adamcameron\symfonythefasttrack\Controller\ConferenceController::show

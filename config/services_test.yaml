@@ -1,0 +1,8 @@
+services:
+    testing.ConferenceRepository:
+        alias: 'adamcameron\symfonythefasttrack\Repository\ConferenceRepository'
+        public: true
+
+    testing.CommentRepository:
+        alias: 'adamcameron\symfonythefasttrack\Repository\CommentRepository'
+        public: true

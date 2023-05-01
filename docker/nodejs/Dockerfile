@@ -1,4 +1,4 @@
-FROM node:19-bullseye
+FROM node:18.16.0-bullseye
 
 RUN ["apt-get", "update"]
 RUN ["apt-get", "install", "-y", "vim", "iputils-ping"]

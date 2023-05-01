@@ -7,3 +7,7 @@ controllers:
 admin:
     resource: routes/admin.yaml
     prefix: /admin
+
+conference:
+    resource: routes/conference.yaml
+    prefix: /conference
